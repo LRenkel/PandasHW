@@ -339,8 +339,8 @@ gender_purchase_analysis
 
 
 ```python
-bins = [0, 7, 11, 16, 21, 26, 31, 36, 41, 46]
-age_labels = ['Under 7', '7-11', '12-16', '17-21', '22-26', '27-31', '32-36', '37-41', '42-46']
+bins = [6.9, 11.9, 16.9, 21.9, 26.9, 31.9, 36.9, 41.9, 99999]
+age_labels = ['7-11', '12-16', '17-21', '22-26', '27-31', '32-36', '37-41', '42 and older']
 df['age_labels'] = pd.cut(df['Age'], bins, labels=age_labels)
 age_counts = (df.groupby("age_labels"))['SN'].nunique().reset_index()
 age_counts = age_counts.rename(columns={'SN': 'Total Count'})
@@ -375,47 +375,42 @@ age_counts
   <tbody>
     <tr>
       <th>0</th>
-      <td>Under 7</td>
-      <td>11</td>
+      <td>7-11</td>
+      <td>27</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>7-11</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>2</th>
       <td>12-16</td>
       <td>68</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
       <td>17-21</td>
       <td>154</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
       <td>22-26</td>
       <td>208</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
       <td>27-31</td>
       <td>54</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>5</th>
       <td>32-36</td>
       <td>37</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>6</th>
       <td>37-41</td>
       <td>22</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>42-46</td>
+      <th>7</th>
+      <td>42 and older</td>
       <td>3</td>
     </tr>
   </tbody>
@@ -466,22 +461,14 @@ age_purchase_analysis
   <tbody>
     <tr>
       <th>0</th>
-      <td>Under 7</td>
-      <td>19</td>
-      <td>$2.92</td>
-      <td>$55.47</td>
-      <td>$5.04</td>
+      <td>7-11</td>
+      <td>41</td>
+      <td>$3.01</td>
+      <td>$123.38</td>
+      <td>$4.57</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>7-11</td>
-      <td>22</td>
-      <td>$3.09</td>
-      <td>$67.91</td>
-      <td>$4.24</td>
-    </tr>
-    <tr>
-      <th>2</th>
       <td>12-16</td>
       <td>92</td>
       <td>$2.81</td>
@@ -489,7 +476,7 @@ age_purchase_analysis
       <td>$3.80</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
       <td>17-21</td>
       <td>204</td>
       <td>$2.88</td>
@@ -497,7 +484,7 @@ age_purchase_analysis
       <td>$3.82</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
       <td>22-26</td>
       <td>275</td>
       <td>$2.96</td>
@@ -505,7 +492,7 @@ age_purchase_analysis
       <td>$3.91</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
       <td>27-31</td>
       <td>79</td>
       <td>$2.98</td>
@@ -513,7 +500,7 @@ age_purchase_analysis
       <td>$4.36</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>5</th>
       <td>32-36</td>
       <td>49</td>
       <td>$3.08</td>
@@ -521,7 +508,7 @@ age_purchase_analysis
       <td>$4.08</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>6</th>
       <td>37-41</td>
       <td>37</td>
       <td>$2.90</td>
@@ -529,8 +516,8 @@ age_purchase_analysis
       <td>$4.88</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>42-46</td>
+      <th>7</th>
+      <td>42 and older</td>
       <td>3</td>
       <td>$2.88</td>
       <td>$8.64</td>
@@ -796,8 +783,10 @@ profitable_item
 
 ## Three Observable Trends
 
-1: The majority of players who are making purchases are males. They spent $1,867.68.
+1: The majority (81%) of players/spenders are males. They spent $1,867.68, which was also 81 percent of the total.
 
 2: In regard to ages, the majority of players are between the ages of 17 and 26, making up 63% of the total players. This age group also spends the most, spending $1402.47 which is more than half the total revenue. 
 
-3: No single player makes a large amount of purchases/spends a significant amount of money as compared with the rest (doesn't appear there are any major outliers); with the biggest spender being Undirrala66 who made 5 purchases. This is both the highest number of purchases and higest total spend for one user.  
+3: Retribution Axe was the top selling item, and also was one of the most purchased items. Its selling price is higher than the average item price, which is contributed to its high total purchase value. To take that a step further, all of the top five "profitable" items are priced higher than the average item price. 
+
+Note: The use of 'profitable' is incorrectly used in this homework assignment. I would be careful in presenting something as profitable without factoring in cost.
